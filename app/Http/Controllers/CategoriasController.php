@@ -9,7 +9,7 @@ class CategoriasController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::query()->orderBy('peso')->get();
+        $categorias = Categoria::query()->orderBy('id')->get();
 
         return view('categorias.index')->with('categorias', $categorias);
     }

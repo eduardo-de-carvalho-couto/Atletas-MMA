@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\{CategoriasController, LutadoresController};
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get('/categorias', [CategoriasController::class, 'index']);
+
+Route::get('/categorias/{categoria}/lutadores', [LutadoresController::class, 'index']);
+Route::get('/categorias/{categoria}/lutadores/create', [LutadoresController::class, 'create']);

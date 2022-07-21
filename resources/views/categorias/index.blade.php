@@ -1,7 +1,16 @@
 <x-layout title="Categorias">
-    <ul>
+
+    
+    <div class="container text-center">
+      <div class="row">
+        
         @foreach ($categorias as $categoria)
-            <li>{{ $categoria['peso'] }}</li>
+          <div class="col-12 col-md-3">
+            <a href="/categorias/{{$categoria['id']}}/lutadores"> {{ $categoria['peso'] }} </a>
+          </div>    
         @endforeach
-    </ul>
+
+      </div>
+    </div>
+      
 </x-layout>

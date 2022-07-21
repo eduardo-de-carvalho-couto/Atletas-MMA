@@ -11,7 +11,10 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    <h1>{{ $title }}</h1>
+    
+    <div class="p-5 bg-dark text-white">
+        <h1>{{ $title }}</h1>
+      </div>
 
     {{ $slot }}
 </body>
