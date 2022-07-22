@@ -12,10 +12,12 @@
 </head>
 <body>
     
-    <div class="p-5 bg-dark text-white">
-        <h1>{{ $title }}</h1>
-      </div>
-
-    {{ $slot }}
+    <div class="container">
+        <div class="p-5 bg-dark text-white">
+            <h1>{{ $title }}</h1>
+        </div>
+    
+        {{ $slot }}
+    </div>
 </body>
 </html>
