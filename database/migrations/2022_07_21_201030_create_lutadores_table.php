@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('lutadores', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('posicao');
+            $table->string('vitorias');
+            $table->string('derrotas');
             $table->foreignId('categoria_id')->constrained();
             $table->timestamps();
         });

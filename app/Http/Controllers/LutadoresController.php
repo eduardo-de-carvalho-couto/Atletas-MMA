@@ -9,32 +9,32 @@ class LutadoresController extends Controller
 {
     public function index(Request $request)
     {
-        $categorias = Categoria::all();
-        
-        $peso = $request->categoria;
+        $lutadores = Lutador::query()->where('categoria_id', $request->categoria)->get();
 
-        $lutadores = $categorias->lutadores;
+        $categoria = $request->categoria;
 
-        return view('lutadores.index')->with('peso', $peso)->with('lutadores', $lutadores);
+        return view('lutadores.index')->with('categoria', $categoria)->with('lutadores', $lutadores);
     }
 
     public function create(Request $request)
     {
-        $peso = $request->categoria;
+        $categoria = $request->categoria;
         
-        return view('lutadores.create')->with('peso', $peso);
+        return view('lutadores.create')->with('categoria', $categoria);
     }
 
     public function store(Request $request)
-    {
-        $nomeLutador = $request->input('nome');
-        $categoria = $request->input('peso');
+    {   
+        $categoria = $request->input('categoria');
 
         Lutador::create([
-            'nome' => $nomeLutador,
-            'categoria_id' => $categoria,
+            'nome' => $request->nome,
+            'categoria_id' => $request->categoria,
+            'posicao' => $request->posicao,
+            'vitorias' => $request->vitorias,
+            'derrotas' => $request->derrotas,
         ]);
 
-        return to_route('categorias.index');
+        return to_route('lutadores.index', $categoria);
     }
 }
