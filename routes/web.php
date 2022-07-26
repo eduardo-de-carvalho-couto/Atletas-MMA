@@ -19,7 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categorias', [CategoriasController::class, 'index']);
+Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
 
-Route::get('/categorias/{categoria}/lutadores', [LutadoresController::class, 'index']);
-Route::get('/categorias/{categoria}/lutadores/create', [LutadoresController::class, 'create']);
+Route::controller(LutadoresController::class)->group(function () {
+    Route::get('/categorias/{categoria}/lutadores', 'index');
+    Route::get('/categorias/{categoria}/lutadores/create', 'create');
+    Route::post('/categorias/{categoria}/lutadores', 'store');
+});

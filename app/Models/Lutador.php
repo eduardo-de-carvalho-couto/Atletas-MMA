@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lutador extends Model
 {
     use HasFactory;
+    protected $fillable = ['nome', 'categoria_id'];
     protected $table = 'lutadores';
 
     public function categoria()
