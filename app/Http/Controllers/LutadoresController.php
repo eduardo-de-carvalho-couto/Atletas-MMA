@@ -31,9 +31,16 @@ class LutadoresController extends Controller
             'nome' => $request->nome,
             'categoria_id' => $request->categoria,
             'posicao' => $request->posicao,
-            'vitorias' => $request->vitorias,
-            'derrotas' => $request->derrotas,
         ]);
+
+        return to_route('lutadores.index', $categoria);
+    }
+
+    public function destroy(Request $request)
+    {
+        Lutador::destroy($request->lutador);
+
+        $categoria = $request->input('categoria');
 
         return to_route('lutadores.index', $categoria);
     }
