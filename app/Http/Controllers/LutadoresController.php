@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LutadoresFormRequest;
 use App\Models\{Categoria, Lutador};
 
 class LutadoresController extends Controller
@@ -24,7 +25,7 @@ class LutadoresController extends Controller
         return view('lutadores.create')->with('categoria', $request->categoria);
     }
 
-    public function store(Request $request)
+    public function store(LutadoresFormRequest $request)
     {
         $lutador = Lutador::create([
             'nome' => $request->nome,
@@ -45,7 +46,7 @@ class LutadoresController extends Controller
             ->with('lutador', $lutador);
     }
 
-    public function update(Request $request)
+    public function update(LutadoresFormRequest $request)
     {
         $lutador = Lutador::find($request->lutador);
 

@@ -1,9 +1,9 @@
 <form action="{{ $action }}" method="post">
     @csrf
 
-    @isset($nome)
+    @if($update)
     @method('PUT')
-    @endisset
+    @endif
 
     <div class="row mb-3">
         <div class="col-10">
