@@ -21,9 +21,6 @@ Route::get('/', function () {
 
 Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
 
-Route::controller(LutadoresController::class)->group(function () {
-    Route::get('/categorias/{categoria}/lutadores', 'index')->name('lutadores.index');
-    Route::get('/categorias/{categoria}/lutadores/create', 'create');
-    Route::post('/categorias/{categoria}/lutadores', 'store');
-    Route::delete('/categorias/{categoria}/lutadores/{lutador}', 'destroy')->name('lutadores.destroy');
-});
+Route::resource('categorias.lutadores', LutadoresController::class)
+    ->except(['show'])
+    ->parameters(['lutadores' => 'lutador']);
