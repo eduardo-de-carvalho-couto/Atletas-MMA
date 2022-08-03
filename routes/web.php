@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CategoriasController, LutadoresController};
+use App\Http\Controllers\{CategoriasController, LutadoresController, LutasController};
 use Illuminate\Http\Request;
 
 /*
@@ -24,3 +24,7 @@ Route::get('/categorias', [CategoriasController::class, 'index'])->name('categor
 Route::resource('categorias.lutadores', LutadoresController::class)
     ->except(['show'])
     ->parameters(['lutadores' => 'lutador']);
+
+Route::resource('lutadores.lutas', LutasController::class)
+    ->except(['show'])
+    ->parameters(['lutadores' => 'lutador']);;

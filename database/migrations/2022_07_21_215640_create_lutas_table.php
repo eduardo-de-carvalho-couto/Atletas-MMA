@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('lutas', function (Blueprint $table) {
             $table->id();
-            $table->string('adversario');
             $table->foreignId('lutador_id')->constrained('lutadores');
-            $table->timestamps();
+            $table->foreignId('adversario_id')->constrained('lutadores');
+            $table->date('data');
+            $table->boolean('vitoria');
         });
     }
 

@@ -10,7 +10,10 @@
     <ul class="list-group">
         @foreach($lutadores as $lutador)
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{ $lutador->nome }}
+
+            <a href="{{ route('lutadores.lutas.index', $lutador->id)  }}">
+                {{ $lutador->nome }}
+            </a>
 
             <span class="d-flex">
                 <a href="{{ route('categorias.lutadores.edit', ['categoria' => $categoria, 'lutador' => $lutador->id]) }}" class="btn btn-primary btn-sm">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Lutador extends Model
 {
@@ -19,5 +20,12 @@ class Lutador extends Model
     public function lutas()
     {
         return $this->hasMany(Luta::class);
+    }
+
+    protected static function booted()
+    {
+        self::addGlobalScope('ordered', function (Builder $queryBuilder) {
+            $queryBuilder->orderBy('posicao');
+        });
     }
 }

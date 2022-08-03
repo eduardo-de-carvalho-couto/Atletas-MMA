@@ -6,7 +6,7 @@
         
         @foreach ($categorias as $categoria)
           <div class="col-12 col-md-3">
-            <a href="/categorias/{{$categoria->id}}/lutadores"> {{ $categoria->peso }} </a>
+            <a href="{{ route('categorias.lutadores.index', $categoria->id) }}"> {{ $categoria->peso }} </a>
           </div>    
         @endforeach
         
