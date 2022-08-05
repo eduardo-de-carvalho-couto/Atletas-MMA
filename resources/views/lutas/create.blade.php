@@ -2,31 +2,50 @@
     <form action="{{ route('lutadores.lutas.store', $lutador) }}" method="post">
         @csrf
     
-        <div class="row mt-3 mb-3">
+        <div class="row d-flex justify-content-center mt-3 mb-3">
             <div class="col-2">
-                <label for="date" class="form-label">Data da luta:</label>
+                <label for="data" class="form-label d-flex justify-content-center">Data da luta:</label>
                 <input  type="text"
-                        id="date" 
-                        name="date" 
+                        id="data" 
+                        name="data" 
                         class="form-control"
                         @isset($data)value="{{$data}}"@endisset>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-2">
-                <div>
-                    <label class="mb-2">Venceu?</label>
+        <div class="row d-flex justify-content-center mt-5 mb-5" >
+            <div class="col-8 d-grid">
+
+                <div class="d-flex justify-content-center">
+                    <label class="mb-2">Adversário:</label>
                 </div>
 
-                <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-success" for="success-outlined">Sim</label>
+                @foreach ($adversarios as $adversario)
+                    <input type="radio" class="btn-check" name="adversario" id="adversario-{{ $adversario->id }}" autocomplete="off" value="{{ $adversario->id }}">
+                    <label class="btn btn-outline-dark" for="adversario-{{ $adversario->id }}">{{ $adversario->nome }}</label>
+                @endforeach
+            </div>           
+        </div>
 
-                <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                <label class="btn btn-outline-danger" for="danger-outlined">Não</label>
+        <div class="row d-flex justify-content-center">
+            <div class="col-2">
+                <div class="d-flex justify-content-center">
+                    <label class="mb-2">Resultado:</label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <input type="radio" class="btn-check" name="resultado" id="success-outlined" autocomplete="off" value="vitoria" checked>
+                    <label class="btn btn-outline-dark" for="success-outlined">Vitória</label>
+
+                    <input type="radio" class="btn-check" name="resultado" id="danger-outlined" autocomplete="off" value="derrota">
+                    <label class="btn btn-outline-dark" for="danger-outlined">Derrota</label>
+                </div>
 
             </div>
         </div>
     
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-dark">Adicionar luta</button>
+        </div>
     </form>
 </x-layout>

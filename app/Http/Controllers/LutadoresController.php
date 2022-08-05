@@ -8,21 +8,22 @@ use App\Models\{Categoria, Lutador};
 
 class LutadoresController extends Controller
 {
-    public function index(Request $request)
+    public function index(Categoria $categoria)
     {
-        $lutadores = Lutador::query()->where('categoria_id', $request->categoria)->get();
+        //$lutadores = Lutador::query()->where('categoria_id', $request->categoria)->get();
+        $lutadores = $categoria->lutadores()->orderBy('posicao')->get();
 
         $mensagemSucesso = session('mensagem.sucesso');
 
         return view('lutadores.index')
-            ->with('categoria', $request->categoria)
+            ->with('categoria', $categoria->id)
             ->with('lutadores', $lutadores)
             ->with('mensagemSucesso', $mensagemSucesso);
     }
 
-    public function create(Request $request)
-    {   
-        return view('lutadores.create')->with('categoria', $request->categoria);
+    public function create(Categoria $categoria)
+    {
+        return view('lutadores.create')->with('categoria', $categoria);
     }
 
     public function store(LutadoresFormRequest $request)
@@ -34,7 +35,7 @@ class LutadoresController extends Controller
         ]);
 
         return to_route('categorias.lutadores.index', $request->categoria)
-            ->with('mensagem.sucesso', "Lutador '{$lutador->nome}' adicionado ao ranking");;
+            ->with('mensagem.sucesso', "Lutador '{$lutador->nome}' adicionado ao ranking");
     }
 
     public function edit(Request $request)
