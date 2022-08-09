@@ -9,10 +9,10 @@ class Luta extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['lutador_id', 'adversario_id', 'data', 'vitoria'];
+    protected $fillable = ['lutador_vencedor_id', 'data'];
 
-    public function lutador()
+    public function lutadores()
     {
-        return $this->belongsTo(Lutador::class);
+        return $this->belongsToMany(Lutador::class, 'luta_lutador');
     }
 }

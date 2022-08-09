@@ -34,10 +34,10 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    <input type="radio" class="btn-check" name="resultado" id="success-outlined" autocomplete="off" value="vitoria" checked>
+                    <input type="radio" class="btn-check" name="resultado" id="success-outlined" autocomplete="off" value="{{ $lutador->id }}" checked>
                     <label class="btn btn-outline-dark" for="success-outlined">Vitória</label>
 
-                    <input type="radio" class="btn-check" name="resultado" id="danger-outlined" autocomplete="off" value="derrota">
+                    <input type="radio" class="btn-check" name="resultado" id="danger-outlined" autocomplete="off" value="{{ $adversario->id }}">
                     <label class="btn btn-outline-dark" for="danger-outlined">Derrota</label>
                 </div>
 

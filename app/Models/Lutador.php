@@ -19,7 +19,7 @@ class Lutador extends Model
 
     public function lutas()
     {
-        return $this->hasMany(Luta::class);
+        return $this->belongsToMany(Luta::class);
     }
 
     protected static function booted()

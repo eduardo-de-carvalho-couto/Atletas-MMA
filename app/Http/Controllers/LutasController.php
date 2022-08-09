@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lutador;
+use Illuminate\Support\Facades\DB;
+use App\Models\{Lutador, Luta};
 
 class LutasController extends Controller
 {
-    public function index()
+    public function index(Lutador $lutador)
     {
-        dd('Lutas desse lutador desta categoria');
+        $lutas = $lutador->lutas()->orderBy('data')->get();
+
+        return view('lutas.index')
+            ->with('lutador', $lutador)
+            ->with('lutas', $lutas);
     }
 
     public function create(Lutador $lutador)
@@ -26,16 +31,16 @@ class LutasController extends Controller
 
     public function store(Lutador $lutador, Request $request)
     {
-        if($request->resultado == 'vitoria'){
-            $request->resultado = true;
-        }else{
-            $request->resultado = false;
-        }
-
-        $lutador->lutas()->create([
-            'adversario_id' => $request->adversario,
+        $adversario = Lutador::find($request->adversario);
+        
+        $luta = Luta::create([
             'data' => $request->data,
-            'vitoria' => $request->resultado,
+            'lutador_vencedor_id' => $request->resultado,
+        ]);
+
+        $luta->lutadores()->saveMany([
+            $lutador,
+            $adversario
         ]);
         
         return to_route('lutadores.lutas.index', $lutador->id)

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lutas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('lutador_vencedor_id')->constrained('lutadores');
-            $table->date('data');
+        Schema::create('luta_lutador', function (Blueprint $table) {
+            $table->foreignId('luta_id')->constrained('lutas');
+            $table->foreignId('lutador_id')->constrained('lutadores');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lutas');
+        Schema::dropIfExists('luta_lutador');
     }
 };
