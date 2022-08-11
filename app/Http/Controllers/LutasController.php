@@ -10,11 +10,17 @@ class LutasController extends Controller
 {
     public function index(Lutador $lutador)
     {
-        $lutas = $lutador->lutas()->orderBy('data')->get();
+        $lutas = $lutador->lutas()->with('lutadores')->orderBy('data', 'desc')->get();
 
+        foreach($lutas as $luta){
+            foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
+                $adversarios[] = $adversario->nome;
+            }
+        }
+        
         return view('lutas.index')
             ->with('lutador', $lutador)
-            ->with('lutas', $lutas);
+            ->with('adversarios', $adversarios);
     }
 
     public function create(Lutador $lutador)
@@ -31,6 +37,13 @@ class LutasController extends Controller
 
     public function store(Lutador $lutador, Request $request)
     {
+        if($request->resultado == 'vitoria'){
+            $request->resultado = $lutador->id;
+        }else{
+            $request->resultado = $request->adversario;
+        }
+
+
         $adversario = Lutador::find($request->adversario);
         
         $luta = Luta::create([

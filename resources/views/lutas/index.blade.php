@@ -8,10 +8,10 @@
     @endisset
 
     <ul class="list-group">
-        @foreach($lutas as $luta)
+        @foreach($adversarios as $adversario)
             <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                {{ $luta->id }} - {{ $lutador->nome }} -- 
+                {{ $lutador->nome }} -- {{ $adversario }}
             
             </li>
         @endforeach
