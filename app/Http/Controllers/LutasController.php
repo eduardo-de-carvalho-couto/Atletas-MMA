@@ -11,13 +11,18 @@ class LutasController extends Controller
     public function index(Lutador $lutador)
     {
         $lutas = $lutador->lutas()->with('lutadores')->orderBy('data', 'desc')->get();
-
-        foreach($lutas as $luta){
-            foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
-                $adversarios[] = $adversario->nome;
-            }
-        }
         
+        if(!empty($lutas->toArray())){
+            foreach($lutas as $luta){
+                foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
+                    $adversarios[] = $adversario->nome;
+                }
+            }
+        }else{
+            $adversarios = null;
+        }
+
+        //dd($adversarios);
         return view('lutas.index')
             ->with('lutador', $lutador)
             ->with('adversarios', $adversarios);

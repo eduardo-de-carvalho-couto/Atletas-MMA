@@ -8,13 +8,15 @@
     @endisset
 
     <ul class="list-group">
-        @foreach($adversarios as $adversario)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+        @if (!empty($adversarios))
+            @foreach($adversarios as $adversario)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                {{ $lutador->nome }} -- {{ $adversario }}
-            
-            </li>
-        @endforeach
+                    {{ $lutador->nome }} -- {{ $adversario }}
+                
+                </li>
+            @endforeach
+        @endif
     </ul>
     
 </x-layout>
