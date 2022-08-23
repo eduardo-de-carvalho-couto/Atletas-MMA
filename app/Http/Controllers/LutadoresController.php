@@ -10,7 +10,6 @@ class LutadoresController extends Controller
 {
     public function index(Categoria $categoria)
     {
-        //$lutadores = Lutador::query()->where('categoria_id', $request->categoria)->get();
         $lutadores = $categoria->lutadores()->orderBy('posicao')->get();
         
         $mensagemSucesso = session('mensagem.sucesso');

@@ -12,7 +12,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
 
             <a href="{{ route('lutadores.lutas.index', $lutador->id)  }}">
-                {{ $lutador->nome }}
+                {{$lutador->posicao }} - {{ $lutador->nome }}
             </a>
 
             <span class="d-flex">
