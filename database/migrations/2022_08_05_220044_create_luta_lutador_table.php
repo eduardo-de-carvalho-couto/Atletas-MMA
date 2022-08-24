@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('luta_lutador', function (Blueprint $table) {
-            $table->foreignId('luta_id')->constrained('lutas');
-            $table->foreignId('lutador_id')->constrained('lutadores');
+            $table->foreignId('luta_id')->constrained('lutas')->onDelete('cascade');
+            $table->foreignId('lutador_id')->constrained('lutadores')->onDelete('cascade');
             $table->timestamps();
         });
     }

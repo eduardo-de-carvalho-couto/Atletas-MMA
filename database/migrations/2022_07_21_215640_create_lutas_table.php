@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('lutas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lutador_vencedor_id')->constrained('lutadores');
+            $table->foreignId('lutador_vencedor_id')->constrained('lutadores')->onDelete('cascade');
             $table->date('data');
         });
     }

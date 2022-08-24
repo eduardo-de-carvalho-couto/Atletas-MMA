@@ -15,4 +15,9 @@ class Luta extends Model
     {
         return $this->belongsToMany(Lutador::class, 'luta_lutador');
     }
+
+    public function vencedor()
+    {
+        return $this->belongsTo(Lutador::class, 'lutador_vencedor_id');
+    }
 }
