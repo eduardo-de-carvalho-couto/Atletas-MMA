@@ -13,4 +13,23 @@ class CategoriasController extends Controller
 
         return view('categorias.index')->with('categorias', $categorias);
     }
+
+    public function create()
+    {
+        return view('categorias.create');
+    }
+
+    public function store(Request $request)
+    {
+        $caminhoDaCapa = $request->file('capa')->store('categorias_capa', 'public');
+        
+        $request->caminhoDaCapa = $caminhoDaCapa;
+        Categoria::create([
+            'peso' => $request->peso,
+            'capa' => $request->caminhoDaCapa,
+        ]);
+
+        return to_route('categorias.index')
+            ->with('mensagem.sucesso', "Categoria criada com sucesso");
+    }
 }

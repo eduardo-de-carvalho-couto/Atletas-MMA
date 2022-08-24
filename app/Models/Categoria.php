@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['peso', 'capa'];
+
 
     public function lutadores()
     {
