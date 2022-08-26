@@ -1,6 +1,12 @@
 <x-layout title="Categorias">
 
   <a href="{{ route('categorias.create') }}" class="btn btn-dark m-2">Adicionar</a>
+
+  @isset($mensagemSucesso)
+    <div class="alert alert-success">
+        {{ $mensagemSucesso }}
+    </div>
+  @endisset
     
   <div class="container text-center">
 
@@ -19,7 +25,7 @@
                 E
             </a>
             
-            <form action="{{ route('categorias.index') }}" method="post" class="ms-2">
+            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="post" class="ms-2">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

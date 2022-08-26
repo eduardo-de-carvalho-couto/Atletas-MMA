@@ -10,8 +10,11 @@ class CategoriasController extends Controller
     public function index()
     {
         $categorias = Categoria::query()->orderBy('id')->get();
+        $mensagemSucesso = session('mensagem.sucesso');
 
-        return view('categorias.index')->with('categorias', $categorias);
+        return view('categorias.index')
+            ->with('categorias', $categorias)
+            ->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create()
@@ -40,11 +43,23 @@ class CategoriasController extends Controller
 
     public function update(Categoria $categoria, Request $request)
     {
-        //
+        $caminhoDaCapa = $request->file('capa')->store('categorias_capa', 'public');
+        $request->caminhoDaCapa = $caminhoDaCapa;
+        
+        $categoria->fill([
+            'peso' => $request->peso,
+            'capa' => $request->caminhoDaCapa,
+        ]);
+        $categoria->save();
+
+        return to_route('categorias.index')->with('mensagem.sucesso', "Categoria '{$categoria->peso}' atualizada com sucesso");
     }
 
-    public function destroy()
+    public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+
+        return to_route('categorias.index')
+            ->with('mensagem.sucesso', 'Categoria removida com sucesso');
     }
 }
