@@ -19,13 +19,18 @@ class Lutador extends Model
 
     public function lutas()
     {
-        return $this->belongsToMany(Luta::class);
+        return $this->belongsToMany(Luta::class, 'luta_lutador');
     }
 
     protected static function booted()
     {
         self::addGlobalScope('ordered', function (Builder $queryBuilder) {
             $queryBuilder->orderBy('posicao');
+        });
+
+        parent::boot();
+        Lutador::deleting(function($lutador){
+            $lutador->lutas()->delete();
         });
     }
 }

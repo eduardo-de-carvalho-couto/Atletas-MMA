@@ -9,15 +9,10 @@ class Luta extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['lutador_vencedor_id', 'data'];
+    protected $fillable = ['data'];
 
     public function lutadores()
     {
-        return $this->belongsToMany(Lutador::class, 'luta_lutador');
-    }
-
-    public function vencedor()
-    {
-        return $this->belongsTo(Lutador::class, 'lutador_vencedor_id');
+        return $this->belongsToMany(Lutador::class, 'luta_lutador')->withPivot('vencedor');
     }
 }

@@ -12,14 +12,12 @@ class EloquentLutasRepository implements LutasRepository
     {
         $lutas = $lutador->lutas()->with('lutadores')->orderBy('data', 'desc')->get();
         
-        if(!empty($lutas->toArray())){
-            foreach($lutas as $luta){
-                foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
-                    $adversarios[] = $adversario->nome;
-                }
+        $adversarios = null;
+        
+        foreach($lutas as $luta){
+            foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
+                $adversarios[] = $adversario->nome;
             }
-        }else{
-            $adversarios = null;
         }
 
         return $adversarios;
@@ -29,23 +27,31 @@ class EloquentLutasRepository implements LutasRepository
     {
         DB::transaction(function () use ($request, $lutador) {
             
-            if($request->resultado == 'vitoria'){
-                $request->resultado = $lutador->id;
-            }else{
-                $request->resultado = $request->adversario;
-            }
-
-            $adversario = Lutador::find($request->adversario);
-        
             $luta = Luta::create([
                 'data' => $request->data,
-                'lutador_vencedor_id' => $request->resultado,
             ]);
 
-            $luta->lutadores()->saveMany([
-                $lutador,
-                $adversario
-            ]);
+            if($request->resultado == 'vitoria'){
+                $this->vitoriaDoLutador($luta, $lutador, $request);
+            }else{
+                $this->vitoriaDoAdversario($luta, $lutador, $request);
+            }
         });
+    }
+
+    private function vitoriaDoLutador(Luta $luta, Lutador $lutador, LutasFormRequest $request): void
+    {
+        $luta->lutadores()->sync([
+            $lutador->id => ['vencedor' => true],
+            $request->adversario,
+        ]);
+    }
+
+    private function vitoriaDoAdversario(Luta $luta, Lutador $lutador, LutasFormRequest $request): void
+    {
+        $luta->lutadores()->sync([
+            $lutador->id,
+            $request->adversario => ['vencedor' => true],
+        ]);
     }
 }
