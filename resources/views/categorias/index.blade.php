@@ -1,17 +1,36 @@
 <x-layout title="Categorias">
 
+  <a href="{{ route('categorias.create') }}" class="btn btn-dark m-2">Adicionar</a>
     
-    <div class="container text-center">
-      <div class="row">
-        
-        @foreach ($categorias as $categoria)
-          <div class="col-12 col-md-3">
-            <img src="{{ asset('storage/'. $categoria->capa) }}" width="290" alt="" class="img-thambnail">
-            <a href="{{ route('categorias.lutadores.index', $categoria->id) }}"> {{ $categoria->peso }} </a>
-          </div>    
-        @endforeach
-        
-      </div>
+  <div class="container text-center">
+
+    <div class="row">
+      
+      @foreach ($categorias as $categoria)
+        <div class="col-12 col-md-3">
+          <img src="{{ asset('storage/'. $categoria->capa) }}" width="270" alt="" style="height: 290px;">
+          <span class="d-flex align-items-center justify-content-center">
+            <a href="{{ route('categorias.lutadores.index', $categoria->id) }}"> 
+              {{ $categoria->peso }} 
+            </a>
+
+            
+            <a href="{{route('categorias.edit', $categoria->id)}}" class="btn btn-primary btn-sm ms-2">
+                E
+            </a>
+            
+            <form action="{{ route('categorias.index') }}" method="post" class="ms-2">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm">
+                    X
+                </button>
+            </form>
+          </span>
+        </div> 
+      @endforeach
+      
     </div>
+  </div>
       
 </x-layout>

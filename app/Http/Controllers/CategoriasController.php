@@ -32,4 +32,19 @@ class CategoriasController extends Controller
         return to_route('categorias.index')
             ->with('mensagem.sucesso', "Categoria criada com sucesso");
     }
+
+    public function edit(Categoria $categoria)
+    {
+        return view('categorias.edit')->with('categoria', $categoria);
+    }
+
+    public function update(Categoria $categoria, Request $request)
+    {
+        //
+    }
+
+    public function destroy()
+    {
+        //
+    }
 }

@@ -19,9 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
-Route::get('/categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');
-Route::post('/categorias', [CategoriasController::class, 'store'])->name('categorias.store');
+Route::resource('categorias', CategoriasController::class)
+    ->except(['show']);
+
+// Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
+// Route::get('/categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');
+// Route::post('/categorias', [CategoriasController::class, 'store'])->name('categorias.store');
 
 Route::resource('categorias.lutadores', LutadoresController::class)
     ->except(['show'])
