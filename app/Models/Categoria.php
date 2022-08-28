@@ -16,4 +16,9 @@ class Categoria extends Model
     {
         return $this->hasMany(Lutador::class);
     }
+
+    public function lutas()
+    {
+        return $this->hasMany(Luta::class);
+    }
 }

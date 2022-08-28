@@ -12,15 +12,15 @@ class EloquentLutasRepository implements LutasRepository
     {
         $lutas = $lutador->lutas()->with('lutadores')->orderBy('data', 'desc')->get();
         
-        $adversarios = null;
+        $lutasComAdversarios = null;
         
         foreach($lutas as $luta){
             foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
-                $adversarios[] = $adversario->nome;
+                $lutasComAdversarios[$luta->id] = $adversario->nome;
             }
         }
 
-        return $adversarios;
+        return $lutasComAdversarios;
     }
 
     public function adicionar(Lutador $lutador, LutasFormRequest $request)
@@ -29,6 +29,7 @@ class EloquentLutasRepository implements LutasRepository
             
             $luta = Luta::create([
                 'data' => $request->data,
+                'categoria_id' => $lutador->categoria->id,
             ]);
 
             if($request->resultado == 'vitoria'){

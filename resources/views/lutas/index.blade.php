@@ -8,11 +8,25 @@
     @endisset
 
     <ul class="list-group">
-        @if (!empty($adversarios))
-            @foreach($adversarios as $adversario)
+        @if (!empty($lutasComAdversarios))
+            @foreach($lutasComAdversarios as $lutaId => $lutaComAdversario)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                    {{ $lutador->nome }} -- {{ $adversario }}
+                    {{ $lutador->nome }} -- {{ $lutaComAdversario }} 
+
+                    <span class="d-flex">
+                        <a href="{{route('lutadores.lutas.index', $lutador->id)}}" class="btn btn-primary btn-sm">
+                            E
+                        </a>
+                        
+                        <form action="{{ route('lutadores.lutas.update', ['lutador' => $lutador->id, 'luta' => $lutaId]) }}" method="post" class="ms-2">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm">
+                                X
+                            </button>
+                        </form>
+                    </span>
                 
                 </li>
             @endforeach

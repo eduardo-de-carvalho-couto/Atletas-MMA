@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LutasFormRequest;
 use App\Models\Lutador;
 use App\Repositories\LutasRepository;
+use App\Models\Luta;
 
 class LutasController extends Controller
 {
@@ -14,11 +15,14 @@ class LutasController extends Controller
 
     public function index(Lutador $lutador)
     {
-        $adversarios = $this->repository->lutasComAdversarios($lutador);
+        $lutasComAdversarios = $this->repository->lutasComAdversarios($lutador);
+
+        $mensagemSucesso = session('mensagem.sucesso');
 
         return view('lutas.index')
             ->with('lutador', $lutador)
-            ->with('adversarios', $adversarios);
+            ->with('lutasComAdversarios', $lutasComAdversarios)
+            ->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create(Lutador $lutador)
@@ -39,5 +43,13 @@ class LutasController extends Controller
         
         return to_route('lutadores.lutas.index', $lutador->id)
             ->with('mensagem.sucesso', "Luta adicionada com sucesso");
+    }
+
+    public function destroy(Lutador $lutador, Luta $luta)
+    {
+        $luta->delete();
+
+        return to_route('lutadores.lutas.index', $lutador->id)
+            ->with('mensagem.sucesso', 'Luta removida com sucesso');
     }
 }

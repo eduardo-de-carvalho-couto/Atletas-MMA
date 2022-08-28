@@ -32,4 +32,4 @@ Route::resource('categorias.lutadores', LutadoresController::class)
 
 Route::resource('lutadores.lutas', LutasController::class)
     ->except(['show'])
-    ->parameters(['lutadores' => 'lutador']);;
+    ->parameters(['lutadores' => 'lutador']);

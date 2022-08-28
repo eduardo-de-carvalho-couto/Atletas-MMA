@@ -13,6 +13,26 @@
 <body>
     
     <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a href="{{ route('categorias.index') }}" class="navbar-brand">Home</a>
+
+                @auth
+                    <form action="{{ route('categorias.index') }}" method="post">
+                        @csrf
+                        <button class="btn btn-link">
+                            Sair
+                        </button>
+                    </form>
+                @endauth
+
+                @guest
+                <a href="{{ route('categorias.index') }}">Entrar</a>
+                @endguest
+            </div>
+        </nav>
+
         <div class="p-5 bg-dark text-white">
             <h1>{{ $title }}</h1>
         </div>

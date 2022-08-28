@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('lutas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
             $table->date('data');
         });
     }
