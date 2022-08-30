@@ -19,7 +19,7 @@
                 <a href="{{ route('categorias.index') }}" class="navbar-brand">Home</a>
 
                 @auth
-                    <form action="{{ route('categorias.index') }}" method="post">
+                    <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="btn btn-link">
                             Sair
@@ -28,12 +28,12 @@
                 @endauth
 
                 @guest
-                <a href="{{ route('categorias.index') }}">Entrar</a>
+                <a href="{{ route('login') }}">Entrar</a>
                 @endguest
             </div>
         </nav>
 
-        <div class="p-5 bg-dark text-white">
+        <div class="p-5 bg-dark text-white mb-3">
             <h1>{{ $title }}</h1>
         </div>
 

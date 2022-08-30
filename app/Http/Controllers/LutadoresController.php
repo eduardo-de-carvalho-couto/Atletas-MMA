@@ -8,6 +8,11 @@ use App\Models\{Categoria, Lutador};
 
 class LutadoresController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index(Categoria $categoria)
     {
         $lutadores = $categoria->lutadores()->orderBy('posicao')->get();

@@ -1,6 +1,8 @@
 <x-layout title="Categorias">
 
+  @auth
   <a href="{{ route('categorias.create') }}" class="btn btn-dark m-2">Adicionar</a>
+  @endauth
 
   @isset($mensagemSucesso)
     <div class="alert alert-success">
@@ -20,7 +22,7 @@
               {{ $categoria->peso }} 
             </a>
 
-            
+            @auth
             <a href="{{route('categorias.edit', $categoria->id)}}" class="btn btn-primary btn-sm ms-2">
                 E
             </a>
@@ -32,6 +34,7 @@
                     X
                 </button>
             </form>
+            @endauth
           </span>
         </div> 
       @endforeach

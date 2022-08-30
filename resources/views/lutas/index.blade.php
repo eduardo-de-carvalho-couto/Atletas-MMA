@@ -1,5 +1,7 @@
 <x-layout title="Lutas">
+    @auth
     <a href="{{ route('lutadores.lutas.create', $lutador) }}" class="btn btn-dark m-2">Adicionar</a>
+    @endauth
 
     @isset($mensagemSucesso)
         <div class="alert alert-success">
@@ -20,6 +22,7 @@
 
                         {{ $lutaComAdversario }}
                         
+                        @auth
                         <form action="{{ route('lutadores.lutas.update', ['lutador' => $lutador->id, 'luta' => $lutaId]) }}" method="post" class="ms-2">
                             @csrf
                             @method('DELETE')
@@ -27,6 +30,7 @@
                                 X
                             </button>
                         </form>
+                        @endauth
                     </span>
                 
                 </li>

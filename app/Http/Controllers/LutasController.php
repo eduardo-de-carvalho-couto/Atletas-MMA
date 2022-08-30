@@ -11,6 +11,7 @@ class LutasController extends Controller
 {
     public function __construct(private LutasRepository $repository)
     {
+        $this->middleware('auth')->except('index');
     }
 
     public function index(Lutador $lutador)

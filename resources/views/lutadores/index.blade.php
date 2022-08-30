@@ -1,5 +1,7 @@
 <x-layout title="Lutadores">
+    @auth
     <a href="/categorias/{{$categoria}}/lutadores/create" class="btn btn-dark m-2">Adicionar</a>
+    @endauth
 
     @isset($mensagemSucesso)
         <div class="alert alert-success">
@@ -15,6 +17,7 @@
                 {{$lutador->posicao }} - {{ $lutador->nome }}
             </a>
 
+            @auth
             <span class="d-flex">
                 <a href="{{ route('categorias.lutadores.edit', ['categoria' => $categoria, 'lutador' => $lutador->id]) }}" class="btn btn-primary btn-sm">
                     E
@@ -29,7 +32,7 @@
                     </button>
                 </form>
             </span>
-        
+            @endauth        
         </li>
         @endforeach
     </ul>
