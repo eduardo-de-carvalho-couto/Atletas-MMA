@@ -21,7 +21,7 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/categorias');
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('categorias', CategoriasController::class)

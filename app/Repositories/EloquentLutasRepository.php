@@ -16,7 +16,10 @@ class EloquentLutasRepository implements LutasRepository
         
         foreach($lutas as $luta){
             foreach($luta->lutadores()->where('id', '!=', $lutador->id)->get() as $adversario){
-                $lutasComAdversarios[$luta->id] = $adversario->nome;
+                $lutasComAdversarios[$luta->id] = [
+                    'adversario' => $adversario->nome,
+                    'adversario_vencedor' => $adversario->pivot->vencedor,
+                ];
             }
         }
 
