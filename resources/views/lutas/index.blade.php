@@ -12,12 +12,13 @@
             @foreach($lutasComAdversarios as $lutaId => $lutaComAdversario)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                    {{ $lutador->nome }} -- {{ $lutaComAdversario }} 
-
                     <span class="d-flex">
-                        <a href="{{route('lutadores.lutas.index', $lutador->id)}}" class="btn btn-primary btn-sm">
-                            E
-                        </a>
+                        {{ $lutador->nome }}
+                    </span>   
+
+                    <span class="d-flex align-items-center">
+
+                        {{ $lutaComAdversario }}
                         
                         <form action="{{ route('lutadores.lutas.update', ['lutador' => $lutador->id, 'luta' => $lutaId]) }}" method="post" class="ms-2">
                             @csrf

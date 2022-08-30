@@ -22,14 +22,10 @@ Route::get('/', function () {
 Route::resource('categorias', CategoriasController::class)
     ->except(['show']);
 
-// Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
-// Route::get('/categorias/create', [CategoriasController::class, 'create'])->name('categorias.create');
-// Route::post('/categorias', [CategoriasController::class, 'store'])->name('categorias.store');
-
 Route::resource('categorias.lutadores', LutadoresController::class)
     ->except(['show'])
     ->parameters(['lutadores' => 'lutador']);
 
 Route::resource('lutadores.lutas', LutasController::class)
-    ->except(['show'])
+    ->except(['show', 'edit'])
     ->parameters(['lutadores' => 'lutador']);
